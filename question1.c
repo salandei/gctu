@@ -1,5 +1,12 @@
 #include <stdio.h>
 
+/**
+*  Paulina Dansoa Adomako - 2425401659
+ *  Solomon Alan-Dei - 2425404803
+ *  Essey Adzahlie-Mensah - 2425402854
+ *  Rudy Nene Amanor - 2425400316
+**/
+
 #define EMPLOYEE_MAX 10
 #define STR_LIM 50
 #define TAX 0.1

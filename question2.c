@@ -1,5 +1,12 @@
 #include <stdio.h>
 
+/**
+*  Paulina Dansoa Adomako - 2425401659
+ *  Solomon Alan-Dei - 2425404803
+ *  Essey Adzahlie-Mensah - 2425402854
+ *  Rudy Nene Amanor - 2425400316
+**/
+
 #define DAYS 7
 
 float findMax(float temps[]);
