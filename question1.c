@@ -24,8 +24,13 @@ int main(void) {
 
 void calculateNetSalary(double grossSalary[], double netSalary[]) {
     for(int i = 0; i < MAX; i++) {
-        double tax_amount = TAX * grossSalary[i];
-        netSalary[i] = grossSalary[i] - tax_amount;
+        if (grossSalary[i] <= 0) {
+            netSalary[i] = 0;
+        }
+        else {
+            double tax_amount = TAX * grossSalary[i];
+            netSalary[i] = grossSalary[i] - tax_amount;
+        }
     }
 }
 
