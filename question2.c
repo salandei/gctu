@@ -10,8 +10,8 @@ int main() {
     // all temps are in degree celcius
     float temperatures[DAYS] = {0.0};
 
-    float max_temp = 0.0;
-    float min_temp = 0.0;
+    float highest_temp = 0.0;
+    float lowest_temp = 0.0;
     float average = 0.0;
 
     // take inputs for daily temperatures
@@ -22,20 +22,23 @@ int main() {
         scanf("%f", &temperatures[i]);
     }
 
-    max_temp = findMax(temperatures);
-    min_temp = findMin(temperatures);
+    highest_temp = findMax(temperatures);
+    lowest_temp = findMin(temperatures);
     average = findAverage(temperatures);
 
     // printing summary report
-    printf("==SUMMARY REPORT==\n\n");
-    printf("DAYS\t\tTEMPERATURES\n");
+    printf("\n=====================================\n");
+    printf("        Summary Temperature Report     \n");
+    printf("=====================================\n");
+    printf("| %-6s | %-15s |\n", "Day", "Temperature (°C)");
+    printf("-------------------------------------\n");
     for (int i = 0; i < DAYS; i++) {
-        printf("%d\t\t%.2f\n", i+1, temperatures[i]);
+        printf("| %-6d | %-15.2f |\n", i + 1, temperatures[i]);
     }
-    printf("-----------------------\n");
-    printf("Maximum temperature = %.2f\n", max_temp);
-    printf("Minimum temperature = %.2f\n", min_temp);
-    printf("Average temperature = %.2f\n", average);
+    printf("Maximum Temperature : %.2f°C\n", highest_temp);
+    printf("Minimum Temperature : %.2f°C\n", lowest_temp);
+    printf("Average Temperature : %.2f°C\n", average);
+    printf("=====================================\n");
 
     return 0;
 
