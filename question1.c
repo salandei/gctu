@@ -1,43 +1,55 @@
 #include <stdio.h>
 
-#define MAX 1
+#define EMPLOYEE_MAX 10
 #define STR_LIM 50
 #define TAX 0.1
 
-void calculateNetSalary(double grossSalary[], double netSalary[]);
-void printSlip(const char names[][STR_LIM],const double grossSalary[],const double netSalary[]);
+double calculateNetSalary(double grossSalary);
+
+void printSlip(char name[], double grossSalary, double netSalary);
 
 int main(void) {
-    double gross_salaries[MAX] = {0}, net_salaries[MAX] = {0};
-    char names[MAX][STR_LIM] = {""};
-    for(int i = 0; i < MAX; i++) {
-        printf("Enter employee name: ");
+    unsigned int num_of_employees;
+    printf("Enter number of employees (1-10): ");
+    scanf("%u", &num_of_employees);
+    if (num_of_employees < 1 || num_of_employees > EMPLOYEE_MAX) {
+        printf("Error: enter a number between 1 and 10\n\n");
+        return -1;
+    }
+    double gross_salaries[num_of_employees], net_salaries[num_of_employees];
+    char names[num_of_employees][STR_LIM];
+    for (int i = 0; i < num_of_employees; i++) {
+        printf("Enter name for employee %u: ", i + 1);
         scanf("%49s", names[i]);
         printf("Enter gross salary: ");
         scanf("%lf", &gross_salaries[i]);
     }
 
-    calculateNetSalary(gross_salaries, net_salaries);
-    printSlip(names, gross_salaries, net_salaries);
+    // calculating net salaries and printing salary slip
+    for (int i = 0; i < num_of_employees; i++) {
+        double net_salary = calculateNetSalary(gross_salaries[i]);
+        printSlip(names[i], gross_salaries[i], net_salary);
+    }
+
     return 0;
 }
 
-void calculateNetSalary(double grossSalary[], double netSalary[]) {
-    for(int i = 0; i < MAX; i++) {
-        if (grossSalary[i] <= 0) {
-            netSalary[i] = 0;
-        }
-        else {
-            double tax_amount = TAX * grossSalary[i];
-            netSalary[i] = grossSalary[i] - tax_amount;
-        }
+double calculateNetSalary(double grossSalary) {
+    if (grossSalary <= 0) {
+        return 0.0;
     }
+    double tax_amount = TAX * grossSalary;
+    return grossSalary - tax_amount;
 }
 
-void printSlip(const char names[][STR_LIM],const double grossSalary[], const double netSalary[]) {
-    for(int i = 0; i < MAX; i++) {
-        printf("%s\n", names[i]);
-        printf("%lf\n", grossSalary[i]);
-        printf("%lf\n\n", netSalary[i]);
-    }
+void printSlip(char name[], double grossSalary, double netSalary) {
+    // Print salary receipt
+    printf("\n=========================================\n");
+    printf("              SALARY RECEIPT             \n");
+    printf("=========================================\n");
+    printf("| %-20s : %-15s |\n", "Employee Name", name);
+    printf("-----------------------------------------\n");
+    printf("| %-20s : GHS%-12.2f |\n", "Gross Salary", grossSalary);
+    printf("| %-20s : GHS%-12.2f |\n", "Tax (10%%)", grossSalary - netSalary);
+    printf("| %-20s : GHS%-12.2f |\n", "Net Salary", netSalary);
 }
